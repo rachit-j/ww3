@@ -3,8 +3,8 @@ layout: post
 title: Welcome to the Third World War
 description: Project Proposal Presentation
 date: 2023-11-15
-hero_image: [SOMEONE BETTER ADD AN IMAGE HERE]
-image: [SOMEONE BETTER ADD AN IMAGE HERE]
+hero_image: /ww3/assets/Main_Image.png
+image: /ww3/assets/Main_Image.png
 hero_height: is-large
 hero_darken: true
 tags: blog
@@ -45,7 +45,7 @@ This project aims to develop a sophisticated card game against a computer oppone
 - Conduct extensive testing (at least 12 runs with 5000 random elements each, excluding high and low outliers) to average results.
 - Determine the most efficient sorting algorithm based on comparisons, swaps, complexity, and total time.
 
-<img width="438" alt="IMG_2939" src="https://github.com/rachit-j/ww3/assets/111611921/744ecd6a-2172-4a60-bb77-84ac2c452d2b">
+<img width="1160" alt="IMG_2939" src="https://github.com/rachit-j/ww3/assets/111611921/744ecd6a-2172-4a60-bb77-84ac2c452d2b">
 
 
 
