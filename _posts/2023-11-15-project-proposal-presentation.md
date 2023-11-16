@@ -9,6 +9,7 @@ hero_height: is-large
 hero_darken: true
 tags: blog
 series: example_blog_series
+show_sidebar: false
 ---
 
 ## Project Overview
