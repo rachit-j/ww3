@@ -1,6 +1,6 @@
 ---
 title: World War 3
-subtitle: A new take on a familiar game
+subtitle: A new take on a familiar game. Made by Tanisha Patil, Rachit Jaiswal, and Luna Iwazaki
 layout: page
 show_sidebar: true
 ---
