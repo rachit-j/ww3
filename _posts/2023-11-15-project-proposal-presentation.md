@@ -3,15 +3,13 @@ layout: post
 title: Welcome to the Third World War
 description: Project Proposal Presentation
 date: 2023-11-15
-hero_image: /ww3/assets/Main_Image.png
-image: /ww3/assets/Main_Image.png
+hero_image: [SOMEONE BETTER ADD AN IMAGE HERE]
+image: [SOMEONE BETTER ADD AN IMAGE HERE]
 hero_height: is-large
 hero_darken: true
 tags: blog
 series: example_blog_series
 ---
-
-# Project Proposal: Advanced Card Game Analysis and Algorithm Development
 
 ## Project Overview
 
@@ -39,13 +37,17 @@ This project aims to develop a sophisticated card game against a computer oppone
 - Develop two additional methods to solve the nth result in the Fibonacci Sequence.
 - Build a frontend output to display results and analysis.
 
-#### B. Sorting Algorithm Analysis
+#### B. Sorting Algorithm Analysis and Inheritance 
 
 - Utilize an abstract class to evaluate the complexity and performance of several sorting algorithms (bubble, insertion, selection, and merge).
 - Implement a parent class to track iterations, comparisons, merges/swaps, and timing.
 - Analyze the Big O complexity, considering operations, time, and space.
 - Conduct extensive testing (at least 12 runs with 5000 random elements each, excluding high and low outliers) to average results.
 - Determine the most efficient sorting algorithm based on comparisons, swaps, complexity, and total time.
+
+<img width="438" alt="IMG_2939" src="https://github.com/rachit-j/ww3/assets/111611921/744ecd6a-2172-4a60-bb77-84ac2c452d2b">
+
+
 
 ### Frontend Development
 
@@ -57,6 +59,9 @@ This project aims to develop a sophisticated card game against a computer oppone
 
 - Create detailed mockups for the game interface and algorithmic visualization before coding.
 - Design the frontend to be intuitive and visually engaging, enhancing the educational aspect.
+
+
+<img width="1160" alt="Screenshot 2023-11-15 at 12 20 48 PM" src="https://github.com/rachit-j/ww3/assets/111661543/9d3bbe53-fd01-47c3-b839-eb2adc532edf">
 
 ### Deliverables
 
