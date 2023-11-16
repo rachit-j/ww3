@@ -1,15 +1,54 @@
 ---
-layout: default
-title: Student Blog
+title: Bulma Clean Theme
+subtitle: This is the demo site for Bulma Clean Theme
+layout: page
+callouts: home_callouts
+show_sidebar: true
 ---
 
+# Bulma Clean Theme demo website
 
-## Build you Home Page here 
-This is about your journey. Start now!!!
+This website showcases the options for the Bulma Clean theme. The theme is available as a ruby gem or can be used with GitHub pages. 
 
-## Overview of Hacks, Study and Tangibles
-Blogging in GitHub pages is a way to learn and code at the same time. 
+[![Gem Version](https://badge.fury.io/rb/bulma-clean-theme.svg)](https://badge.fury.io/rb/bulma-clean-theme)
+![Gem](https://img.shields.io/gem/dt/bulma-clean-theme.svg)
+![GitHub Repo stars](https://img.shields.io/github/stars/chrisrhymes/bulma-clean-theme?style=social)
 
-- Plans, Lists, [Scrum Boards](https://clickup.com/blog/scrum-board/) help you to track key events, show progress and record time.  Effort is a big part of your class grade.  Show plans and time spent!
-- [Hacks(Todo)](https://levelup.gitconnected.com/six-ultimate-daily-hacks-for-every-programmer-60f5f10feae) enable you to stay in focus with key requirements of the class.  Each Hack will produce Tangibles.
-- Tangibles or [Tangible Artifacts](https://en.wikipedia.org/wiki/Artifact_(software_development)) are things you accumulate as a learner and coder. 
+## Ruby Gem
+
+The ruby gem is available on the Ruby Gems website at the following location. [https://rubygems.org/gems/bulma-clean-theme](https://rubygems.org/gems/bulma-clean-theme).
+
+## GitHub Pages
+
+The theme can be used with GitHub Pages by setting the `remote_theme` in your Jekyll sites `_config.yml`
+
+```yml
+remote_theme: chrisrhymes/bulma-clean-theme
+```
+
+## Documentation
+
+For full instructions, please see the [Documentation](/bulma-clean-theme/docs/)
+
+## Page Layouts
+
+This demo site showcases the available page layout options. 
+
+* Sidebar
+* Menubar
+* Tabs
+* Footer
+* Hero
+* Contents
+* Landing Page With Callouts
+* Sponsors Page
+* Image Gallery
+* Recipe Page
+* Blog
+* Post
+
+## Supported By JetBrains
+
+JetBrains have kindly provided an Open Source licence to aid in the future development of Bulma Clean Theme.
+
+[![JetBrains](img/jetbrains-variant-4.svg)](https://www.jetbrains.com/?from=bulma-clean-theme)
