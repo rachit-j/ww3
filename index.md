@@ -10,8 +10,6 @@ show_sidebar: true
 ![cards gif](img/cards.gif)
 
 
-<img width="1160" alt="Screenshot 2023-11-15 at 12 20 48 PM" src="https://github.com/rachit-j/ww3/assets/111661543/9d3bbe53-fd01-47c3-b839-eb2adc532edf">
-
 **Rules:**
 1. Large deck split into halves for Player 1 and Player 2 
 2. Player 1 draws three cards from their deck at random 
