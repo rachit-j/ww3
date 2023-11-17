@@ -1,8 +1,0 @@
-- label: Example Menu
-  items:
-    - name: Home
-      link: /
-    - name: Game
-      link: /game/
-    - name: Blog
-      link: /blog/
