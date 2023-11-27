@@ -1,65 +1,43 @@
-# bulma-clean-theme
+# World War 3
 
-[![Gem Version](https://badge.fury.io/rb/bulma-clean-theme.svg)](https://badge.fury.io/rb/bulma-clean-theme)
-![Gem](https://img.shields.io/gem/dt/bulma-clean-theme.svg)
+This is a card game application that allows users to play against each other on the same device. The cards are randomly sorted using ___ sort. Users can also see a visualized fibonacci sequence 
 
-This is a clean and simple Jekyll Theme built with the [Bulma](https://bulma.io/) framework, providing a modern-looking site to start with. 
+## Accessing the Project
+To access the WW3 Game Application, please use the following link: [Game Link](https://rachit-j.github.io/ww3/)
 
-The theme uses [Alpine.js](https://github.com/alpinejs/alpine) for its interactive components, such as mobile navbar and notifications.
+Or to build our game just **git clone https://github.com/rachit-j/ww3.git**
 
-## Contents
+## Features
 
-* [Installation](#installation)
-* [Documentation](#documentation)
-* [Contributing](#contributing)
-* [Development](#development)
-* [Licence](#licence)
+**WW3 Card Game:** The **W**orld **W**ar **3** card game >>>>
+
+**Sorting:** >>> describe sort used in the the card game
+
+**Fibbonacci Upgrade:** Upgraded version of fibbonacci sorting with a better and more >>
+
+**Analysis:** >>>
+
+## [How to Play](https://rachit-j.github.io/ww3/)
+
+1. Large deck split into halves for Player 1 and Player 2
+2. Player 1 draws three cards from their deck at random
+3. Player 2 draws three cards from their deck at random
+4. Cards are organized in descending order with sorting algorithm
+5. Card at the third index of the sorted card list is chosen as the victory card
+6. The player who added te vvictory card is awarded 1 point and a new round begins
+7. The player with the most points after 3 rounds wins and the game restarts
+
+## Feedback and Support
+
+We hope you enjoy playing WW3! If you encounter any issues, have suggestions, or need assistance, please see us in Mort's room period 1. We value your feedback and will be happy to assist you.
+
+**Almost Brown Team**
+
+## Credentials
+Rachit Jaiswal        Tanisha Patil         Luna Iwazaki
 
 
-## Installation
 
-Add this line to your Jekyll site's `Gemfile`:
 
-```ruby
-gem "bulma-clean-theme"
-```
 
-And add this line to your Jekyll site's `_config.yml`:
-
-```yaml
-theme: bulma-clean-theme
-```
-
-If you are deploying to GitHub pages, then you can also install the [GitHub Pages gem](https://github.com/github/pages-gem) and use `remote_theme` instead of `theme` in your `_config.yml`. **Note that the GitHub Pages gem requires Jekyll version 3.9.**
-
-```yaml
-# With GitHub Pages Gem
-remote_theme: chrisrhymes/bulma-clean-theme
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install bulma-clean-theme
-
-## Documentation
-
-Check out the demo site for the [Documentation](https://www.csrhymes.com/bulma-clean-theme/docs/)
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/chrisrhymes/bulma-clean-theme. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## Development
-
-To set up your environment to develop this theme, run `bundle install`.
-
-Your theme is set up just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
