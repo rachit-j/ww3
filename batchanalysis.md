@@ -1,4 +1,9 @@
-
+---
+title: Batch Analysis
+subtitle: Analysis to the sorts -- One list
+layout: page
+show_sidebar: false
+---
 <style>
     .scrollable-list {
         max-height: 100px; /* Adjust the max height as needed */
@@ -85,6 +90,6 @@
     }
 </script>
 <h1>Sorting Analysis</h1>
-<input type="text" id="analysisInput" placeholder="Enternumbers separated by commas for analysis" />
+<input type="text" id="analysisInput" placeholder="Enter numbers separated by commas for analysis" />
 <button onclick="analyzeSorts()">Analyze</button>
 <div id="analysisTable"></div>
