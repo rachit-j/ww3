@@ -8,12 +8,14 @@ show_sidebar: false
 <script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
-        var formData = new FormData();
-        formData.append('input', data); // Add the input data to the form data
+        var requestData = { input: data }; // Create an object to hold the input data
 
         fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
             method: 'POST', // Change the method to POST
-            body: formData, // Send the form data in the request body
+            headers: {
+                'Content-Type': 'application/json', // Set the content type to JSON
+            },
+            body: JSON.stringify(requestData), // Send the input data as JSON in the request body
         })
         .then(response => response.json())
         .then(data => {
@@ -26,12 +28,14 @@ show_sidebar: false
 
     function analyzeSorts() {
         var data = document.getElementById('analysisInput').value;
-        var formData = new FormData();
-        formData.append('input', data); // Add the input data to the form data
+        var requestData = { input: data }; // Create an object to hold the input data
 
         fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
             method: 'POST', // Change the method to POST
-            body: formData, // Send the form data in the request body
+            headers: {
+                'Content-Type': 'application/json', // Set the content type to JSON
+            },
+            body: JSON.stringify(requestData), // Send the input data as JSON in the request body
         })
         .then(response => response.json())
         .then(data => {
@@ -42,6 +46,7 @@ show_sidebar: false
         });
     }
 </script>
+
 
 ## Bubble Sort
 
