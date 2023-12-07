@@ -82,7 +82,7 @@ show_sidebar: false
 
 <script>
     function sendSortRequest(sortType) {
-        fetch('http://localhost:8062/api/card', {
+        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/card', {
             method: 'GET',
         })
         .then(response => response.json())
