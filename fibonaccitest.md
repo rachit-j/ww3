@@ -48,14 +48,10 @@ show_sidebar: false
             else y += currentRadius / 2;
         }
     }
-
+</script>
+<script>
     function fetchFibonacci(method, index) {
-        method: 'POST',
-        body: JSON.stringify(requestData),
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Accept': 'application/json', // Uncomment if needed
-        },
+        fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById(method + 'Result').textContent = JSON.stringify(data);
