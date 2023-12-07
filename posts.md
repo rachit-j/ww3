@@ -8,14 +8,12 @@ show_sidebar: false
 <script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
-        var requestData = { input: data }; // Create an object to hold the input data
+        var formData = new FormData();
+        formData.append('input', data); // Add the input data to the form data
 
         fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
             method: 'POST', // Change the method to POST
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData), // Send the input data as JSON in the request body
+            body: formData, // Send the form data in the request body
         })
         .then(response => response.json())
         .then(data => {
@@ -28,14 +26,12 @@ show_sidebar: false
 
     function analyzeSorts() {
         var data = document.getElementById('analysisInput').value;
-        var requestData = { input: data }; // Create an object to hold the input data
+        var formData = new FormData();
+        formData.append('input', data); // Add the input data to the form data
 
         fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
             method: 'POST', // Change the method to POST
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData), // Send the input data as JSON in the request body
+            body: formData, // Send the form data in the request body
         })
         .then(response => response.json())
         .then(data => {
@@ -76,7 +72,6 @@ show_sidebar: false
 <input type="text" id="analysisInput" placeholder="Enter numbers separated by commas for analysis" />
 <button onclick="analyzeSorts()">Analyze</button>
 <pre id="analysisResult"></pre>
-
 
 <script>
     function fetchFibonacci(method, index) {
