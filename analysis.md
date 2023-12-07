@@ -85,28 +85,18 @@ show_sidebar: false
 
 <input type="text" id="bubbleInput" placeholder="Enter numbers separated by commas" />
 <button onclick="sendSortRequest('bubble')">Sort</button>
-<pre id="bubbleResult"></pre>
 
 ## Insertion Sort
 
 <input type="text" id="insertionInput" placeholder="Enter numbers separated by commas" />
 <button onclick="sendSortRequest('insertion')">Sort</button>
-<pre id="insertionResult"></pre>
 
 ## Merge Sort
 
 <input type="text" id="mergeInput" placeholder="Enter numbers separated by commas" />
 <button onclick="sendSortRequest('merge')">Sort</button>
-<pre id="mergeResult"></pre>
 
 ## Selection Sort
 
 <input type="text" id="selectionInput" placeholder="Enter numbers separated by commas" />
 <button onclick="sendSortRequest('selection')">Sort</button>
-<pre id="selectionResult"></pre>
-
-## Sorting Analysis
-
-<input type="text" id="analysisInput" placeholder="Enter numbers separated by commas for analysis" />
-<button onclick="analyzeSorts()">Analyze</button>
-<pre id="analysisResult"></pre>
