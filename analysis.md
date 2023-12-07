@@ -1,12 +1,4 @@
----
-title: Analysis
-subtitle: Analysis to the sorts
-layout: page
-show_sidebar: false
----
-
-# Analysis
-
+<!-- Add a table for displaying results -->
 <table>
     <thead>
         <tr>
@@ -16,6 +8,8 @@ show_sidebar: false
             <th>Iterations</th>
             <th>Comparisons</th>
             <th>Swaps</th>
+            <th>Input</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +20,8 @@ show_sidebar: false
             <td id="bubbleIterations"></td>
             <td id="bubbleComparisons"></td>
             <td id="bubbleSwaps"></td>
+            <td><input type="text" id="bubbleInput" placeholder="Enter numbers separated by commas" /></td>
+            <td><button onclick="sendSortRequest('bubble')">Sort</button></td>
         </tr>
         <tr id="insertionRow">
             <td>Insertion Sort</td>
@@ -34,6 +30,8 @@ show_sidebar: false
             <td id="insertionIterations"></td>
             <td id="insertionComparisons"></td>
             <td id="insertionSwaps"></td>
+            <td><input type="text" id="insertionInput" placeholder="Enter numbers separated by commas" /></td>
+            <td><button onclick="sendSortRequest('insertion')">Sort</button></td>
         </tr>
         <tr id="mergeRow">
             <td>Merge Sort</td>
@@ -42,6 +40,8 @@ show_sidebar: false
             <td id="mergeIterations"></td>
             <td id="mergeComparisons"></td>
             <td id="mergeSwaps"></td>
+            <td><input type="text" id="mergeInput" placeholder="Enter numbers separated by commas" /></td>
+            <td><button onclick="sendSortRequest('merge')">Sort</button></td>
         </tr>
         <tr id="selectionRow">
             <td>Selection Sort</td>
@@ -50,6 +50,8 @@ show_sidebar: false
             <td id="selectionIterations"></td>
             <td id="selectionComparisons"></td>
             <td id="selectionSwaps"></td>
+            <td><input type="text" id="selectionInput" placeholder="Enter numbers separated by commas" /></td>
+            <td><button onclick="sendSortRequest('selection')">Sort</button></td>
         </tr>
     </tbody>
 </table>
@@ -80,23 +82,3 @@ show_sidebar: false
         });
     }
 </script>
-
-## Bubble Sort
-
-<input type="text" id="bubbleInput" placeholder="Enter numbers separated by commas" />
-<button onclick="sendSortRequest('bubble')">Sort</button>
-
-## Insertion Sort
-
-<input type="text" id="insertionInput" placeholder="Enter numbers separated by commas" />
-<button onclick="sendSortRequest('insertion')">Sort</button>
-
-## Merge Sort
-
-<input type="text" id="mergeInput" placeholder="Enter numbers separated by commas" />
-<button onclick="sendSortRequest('merge')">Sort</button>
-
-## Selection Sort
-
-<input type="text" id="selectionInput" placeholder="Enter numbers separated by commas" />
-<button onclick="sendSortRequest('selection')">Sort</button>
