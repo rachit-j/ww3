@@ -16,18 +16,6 @@ show_sidebar: false
       justify-content: center;
       font-size: 18px;
     }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-    }
   </style>
 
 <script>
