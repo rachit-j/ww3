@@ -4,7 +4,31 @@ subtitle: Sample Post Requests
 layout: product-category
 show_sidebar: false
 ---
+  <style>
+    .box {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: lightblue;
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
 
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
 
 <script>
     function sendSortRequest(sortType) {
@@ -90,28 +114,11 @@ show_sidebar: false
             console.error('Error:', error);
         });
     }
-</script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    .box {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background-color: lightblue;
-      margin: 0 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-  </style>
-</head>
-<body>
-  <script>
+
+
+
+    // animation for each of the sorts
+      <script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
         var requestData = data.split(',').map(Number);
@@ -185,11 +192,54 @@ show_sidebar: false
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    // display analysis   
+    function analyzeSorts() {
+      var data = document.getElementById('analysisInput').value;
+      var requestData = data.split(',').map(Number);
+
+      fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        displayAnalysisResults(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+
+    function displayAnalysisResults(results) {
+      const table = document.createElement('table');
+      const headerRow = table.insertRow();
+      const headers = ['Sort Type', 'Sorted List', 'Time Taken (ms)', 'Iterations', 'Comparisons', 'Swaps'];
+
+      headers.forEach(headerText => {
+        const th = document.createElement('th');
+        th.appendChild(document.createTextNode(headerText));
+        headerRow.appendChild(th);
+      });
+
+      results.forEach(result => {
+        const row = table.insertRow();
+        const cellValues = [result.sortType, result.sortedList, result.timeTakenMs, result.iterations, result.comparisons, result.swaps];
+
+        cellValues.forEach(cellValue => {
+          const cell = row.insertCell();
+          cell.appendChild(document.createTextNode(cellValue));
+        });
+      });
+
+      const analysisResult = document.getElementById('analysisResult');
+      analysisResult.innerHTML = '';
+      analysisResult.appendChild(table);
+    }
+
   </script>
 
-  <h2>Bubble Sort</h2>
-  <input type="text" id="bubbleInput" placeholder="Enter numbers separated by commas" />
-  <button onclick="sendSortRequest('bubble')">Sort</button>
-  <div id="bubbleResult"></div>
-</body>
-</html>
+
