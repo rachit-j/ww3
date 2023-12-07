@@ -192,54 +192,6 @@ show_sidebar: false
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
-    // display analysis   
-    function analyzeSorts() {
-      var data = document.getElementById('analysisInput').value;
-      var requestData = data.split(',').map(Number);
-
-      fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
-        method: 'POST',
-        body: JSON.stringify(requestData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        displayAnalysisResults(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    }
-
-    function displayAnalysisResults(results) {
-      const table = document.createElement('table');
-      const headerRow = table.insertRow();
-      const headers = ['Sort Type', 'Sorted List', 'Time Taken (ms)', 'Iterations', 'Comparisons', 'Swaps'];
-
-      headers.forEach(headerText => {
-        const th = document.createElement('th');
-        th.appendChild(document.createTextNode(headerText));
-        headerRow.appendChild(th);
-      });
-
-      results.forEach(result => {
-        const row = table.insertRow();
-        const cellValues = [result.sortType, result.sortedList, result.timeTakenMs, result.iterations, result.comparisons, result.swaps];
-
-        cellValues.forEach(cellValue => {
-          const cell = row.insertCell();
-          cell.appendChild(document.createTextNode(cellValue));
-        });
-      });
-
-      const analysisResult = document.getElementById('analysisResult');
-      analysisResult.innerHTML = '';
-      analysisResult.appendChild(table);
-    }
-
   </script>
 
 
