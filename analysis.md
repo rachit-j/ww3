@@ -7,6 +7,13 @@ show_sidebar: false
 
 # Analysis
 
+<style>
+    .scrollable-list {
+        max-height: 100px; /* Adjust the max height as needed */
+        overflow-y: auto;
+    }
+</style>
+
 <table>
     <thead>
         <tr>
@@ -23,7 +30,11 @@ show_sidebar: false
     <tbody>
         <tr id="bubbleRow">
             <td>Bubble Sort</td>
-            <td id="bubbleList"></td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="bubbleList"></span>
+                </div>
+            </td>
             <td id="bubbleTime"></td>
             <td id="bubbleIterations"></td>
             <td id="bubbleComparisons"></td>
@@ -33,7 +44,11 @@ show_sidebar: false
         </tr>
         <tr id="insertionRow">
             <td>Insertion Sort</td>
-            <td id="insertionList"></td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="insertionList"></span>
+                </div>
+            </td>
             <td id="insertionTime"></td>
             <td id="insertionIterations"></td>
             <td id="insertionComparisons"></td>
@@ -43,7 +58,11 @@ show_sidebar: false
         </tr>
         <tr id="mergeRow">
             <td>Merge Sort</td>
-            <td id="mergeList"></td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="mergeList"></span>
+                </div>
+            </td>
             <td id="mergeTime"></td>
             <td id="mergeIterations"></td>
             <td id="mergeComparisons"></td>
@@ -53,7 +72,11 @@ show_sidebar: false
         </tr>
         <tr id="selectionRow">
             <td>Selection Sort</td>
-            <td id="selectionList"></td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="selectionList"></span>
+                </div>
+            </td>
             <td id="selectionTime"></td>
             <td id="selectionIterations"></td>
             <td id="selectionComparisons"></td>
