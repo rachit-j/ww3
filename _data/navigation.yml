@@ -1,12 +1,12 @@
-
-- name: Fibonacci
-  link: /fibonacci/
 - name: Sorts
   link: /posts/
-- name: Blog
-  link: /blog/
 - name: Analysis
   link: /analysis/
 - name: Batch Analysis
   link: /batchanalysis/
+- name: Fibonacci
+  link: /fibonacci/
+- name: Blog
+  link: /blog/
+
 
