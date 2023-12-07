@@ -122,3 +122,85 @@ show_sidebar: false
         });
     }
 </script>
+
+
+# Complete Easy Analysis
+
+<input type="text" id="analysisInput" placeholder="Enter numbers separated by commas for analysis" />
+<button onclick="analyzeSorts()">Analyze</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sort Type</th>
+            <th>Sorted List</th>
+            <th>Time Taken (ms)</th>
+            <th>Iterations</th>
+            <th>Comparisons</th>
+            <th>Swaps</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="bubbleRow">
+            <td>Bubble Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="bubbleList"></span>
+                </div>
+            </td>
+            <td id="bubbleTime"></td>
+            <td id="bubbleIterations"></td>
+            <td id="bubbleComparisons"></td>
+            <td id="bubbleSwaps"></td>
+        </tr>
+        <!-- Repeat this structure for Insertion Sort, Merge Sort, and Selection Sort -->
+        <tr id="insertionRow">
+            <td>Insertion Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="insertionList"></span>
+                </div>
+            </td>
+            <td id="insertionTime"></td>
+            <td id="insertionIterations"></td>
+            <td id="insertionComparisons"></td>
+            <td id="insertionSwaps"></td>
+        </tr>
+        <tr id="mergeRow">
+            <td>Merge Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="mergeList"></span>
+                </div>
+            </td>
+            <td id="mergeTime"></td>
+            <td id="mergeIterations"></td>
+            <td id="mergeComparisons"></td>
+            <td id="mergeSwaps"></td>
+        </tr>
+        <tr id="selectionRow">
+            <td>Selection Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="selectionList"></span>
+                </div>
+            </td>
+            <td id="selectionTime"></td>
+            <td id="selectionIterations"></td>
+            <td id="selectionComparisons"></td>
+            <td id="selectionSwaps"></td>
+        </tr>
+        <tr id="analysisRow">
+            <td>Analysis</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="analysisList"></span>
+                </div>
+            </td>
+            <td id="analysisTime"></td>
+            <td id="analysisIterations"></td>
+            <td id="analysisComparisons"></td>
+            <td id="analysisSwaps"></td>
+        </tr>
+    </tbody>
+</table>
