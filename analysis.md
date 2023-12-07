@@ -1,4 +1,12 @@
-<!-- Add a table for displaying results -->
+---
+title: Analysis
+subtitle: Analysis to the sorts
+layout: page
+show_sidebar: false
+---
+
+# Analysis
+
 <table>
     <thead>
         <tr>
@@ -71,7 +79,16 @@
         .then(response => response.json())
         .then(data => {
             // Update the table with the results
-            document.getElementById(sortType + 'List').textContent = data.sortedList.join(', ');
+            var sortedListCell = document.getElementById(sortType + 'List');
+            var sortedList = data.sortedList.join(', ');
+
+            if (sortedList.length > 50) {
+                // scroll
+                sortedListCell.innerHTML = '<div class="scrollable-list">' + sortedList + '</div>';
+            } else {
+                sortedListCell.textContent = sortedList;
+            }
+
             document.getElementById(sortType + 'Time').textContent = data.timeTakenMs;
             document.getElementById(sortType + 'Iterations').textContent = data.iterations;
             document.getElementById(sortType + 'Comparisons').textContent = data.comparisons;
