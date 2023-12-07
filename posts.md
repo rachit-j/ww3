@@ -92,19 +92,6 @@ show_sidebar: false
 <pre id="analysisResult"></pre>
 
 <script>
-    function fetchFibonacci(method, index) {
-        fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById(method + 'Result').textContent = JSON.stringify(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-
-
     // animation for each of the sorts
       <script>
     function sendSortRequest(sortType) {

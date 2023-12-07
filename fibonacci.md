@@ -22,3 +22,16 @@ show_sidebar: false
 <input type="number" id="binetIndex" placeholder="Enter Fibonacci Index" />
 <button onclick="fetchFibonacci('binet', document.getElementById('binetIndex').value)">Calculate</button>
 <pre id="binetResult"></pre>
+
+<script>
+    function fetchFibonacci(method, index) {
+        fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById(method + 'Result').textContent = JSON.stringify(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
