@@ -5,4 +5,8 @@
   link: /posts/
 - name: Blog
   link: /blog/
+- name: Analysis
+  link: /analysis/
+- name: Batch Analysis
+  link: /batchanalysis/
 
