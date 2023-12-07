@@ -5,8 +5,6 @@ layout: page
 show_sidebar: false
 ---
 
-# Analysis
-
 <style>
     .scrollable-list {
         max-height: 100px; /* Adjust the max height as needed */
