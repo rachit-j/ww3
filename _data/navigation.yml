@@ -1,9 +1,8 @@
-- name: Game
-  link: /game/
-- name: Leader Board
-  link: /leaderboard/
+
 - name: Fibonacci
   link: /fibonacci/
+- name: Sorts
+  link: /posts/
 - name: Blog
   link: /blog/
 

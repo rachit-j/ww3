@@ -91,3 +91,105 @@ show_sidebar: false
         });
     }
 </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .box {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: lightblue;
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function sendSortRequest(sortType) {
+        var data = document.getElementById(sortType + 'Input').value;
+        var requestData = data.split(',').map(Number);
+
+        visualizeSort(sortType, requestData);
+    }
+
+    function visualizeSort(sortType, data) {
+        const containerId = sortType + 'Result';
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+
+        const visualization = document.createElement('div');
+        visualization.id = sortType + 'Visualization';
+        visualization.style.display = 'flex';
+
+        data.forEach((num) => {
+            const box = document.createElement('div');
+            box.className = 'box';
+            box.textContent = num;
+            visualization.appendChild(box);
+        });
+
+        container.appendChild(visualization);
+
+        animateSort(sortType, data);
+    }
+
+    async function animateSort(sortType, data) {
+        const visualization = document.getElementById(sortType + 'Visualization');
+        const length = data.length;
+
+        for (let i = 0; i < length - 1; i++) {
+            for (let j = 0; j < length - i - 1; j++) {
+                // Highlight the elements being compared
+                visualization.children[j].style.backgroundColor = 'yellow';
+                visualization.children[j + 1].style.backgroundColor = 'yellow';
+
+                await sleep(500); // Adjust the speed of animation
+
+                // Swap elements if they are in the wrong order
+                if (data[j] > data[j + 1]) {
+                    const temp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
+
+                    updateVisualization(sortType, data);
+                }
+
+                // Reset background color
+                visualization.children[j].style.backgroundColor = 'lightblue';
+                visualization.children[j + 1].style.backgroundColor = 'lightblue';
+            }
+        }
+
+        updateVisualization(sortType, data);
+    }
+
+    function updateVisualization(sortType, data) {
+        const visualization = document.getElementById(sortType + 'Visualization');
+        visualization.innerHTML = '';
+
+        data.forEach((num) => {
+            const box = document.createElement('div');
+            box.className = 'box';
+            box.textContent = num;
+            visualization.appendChild(box);
+        });
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+  </script>
+
+  <h2>Bubble Sort</h2>
+  <input type="text" id="bubbleInput" placeholder="Enter numbers separated by commas" />
+  <button onclick="sendSortRequest('bubble')">Sort</button>
+  <div id="bubbleResult"></div>
+</body>
+</html>
