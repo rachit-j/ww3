@@ -8,14 +8,14 @@ show_sidebar: false
 <script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
-        var requestData = { input: data }; // Create an object to hold the input data
+        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
 
         fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
-            method: 'POST', // Change the method to POST
+            method: 'POST',
+            body: JSON.stringify(requestData), // Send the list directly as the request body
             headers: {
-                'Content-Type': 'application/json', // Set the content type to JSON
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestData), // Send the input data as JSON in the request body
         })
         .then(response => response.json())
         .then(data => {
@@ -28,14 +28,14 @@ show_sidebar: false
 
     function analyzeSorts() {
         var data = document.getElementById('analysisInput').value;
-        var requestData = { input: data }; // Create an object to hold the input data
+        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
 
         fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
-            method: 'POST', // Change the method to POST
+            method: 'POST',
+            body: JSON.stringify(requestData), // Send the list directly as the request body
             headers: {
-                'Content-Type': 'application/json', // Set the content type to JSON
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestData), // Send the input data as JSON in the request body
         })
         .then(response => response.json())
         .then(data => {
