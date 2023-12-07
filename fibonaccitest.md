@@ -50,12 +50,15 @@ show_sidebar: false
     }
 
     function fetchFibonacci(method, index) {
-        fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Accept': 'application/json', // Uncomment if needed
+        },
         .then(response => response.json())
         .then(data => {
             document.getElementById(method + 'Result').textContent = JSON.stringify(data);
-            fibSequence = data.sequence; // Assuming the API returns the sequence up to that index
-            drawFibonacciShell(fibSequence.length); // Draw the shell visualization
         })
         .catch(error => {
             console.error('Error:', error);
