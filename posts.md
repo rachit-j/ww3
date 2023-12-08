@@ -91,9 +91,28 @@ show_sidebar: false
 <button onclick="analyzeSorts()">Analyze</button>
 <pre id="analysisResult"></pre>
 
-<script>
-    // animation for each of the sorts
-      <script>
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .box {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: lightblue;
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
         var requestData = data.split(',').map(Number);
@@ -168,5 +187,7 @@ show_sidebar: false
         return new Promise(resolve => setTimeout(resolve, ms));
     }
   </script>
+</body>
+</html>
 
 
