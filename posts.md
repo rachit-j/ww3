@@ -1,74 +1,18 @@
 ---
 title: Posts
 subtitle: Sample Post Requests
-layout: product-category
+layout: page
 show_sidebar: false
 ---
-  <style>
-    .box {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background-color: lightblue;
-      margin: 0 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-  </style>
-
-<script>
-    function sendSortRequest(sortType) {
-        var data = document.getElementById(sortType + 'Input').value;
-        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
-
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
-            method: 'POST',
-            body: JSON.stringify(requestData), // Send the list directly as the request body
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById(sortType + 'Result').textContent = JSON.stringify(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
-    function analyzeSorts() {
-        var data = document.getElementById('analysisInput').value;
-        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
-
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
-            method: 'POST',
-            body: JSON.stringify(requestData), // Send the list directly as the request body
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('analysisResult').textContent = JSON.stringify(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-</script>
-
 
 ## Bubble Sort
-
+<p>
 <input type="text" id="bubbleInput" placeholder="Enter numbers separated by commas" />
 <button onclick="sendSortRequest('bubble')">Sort</button>
 <pre id="bubbleResult"></pre>
 
 ## Insertion Sort
-
+<p>
 <input type="text" id="insertionInput" placeholder="Enter numbers separated by commas" />
 <button onclick="sendSortRequest('insertion')">Sort</button>
 <pre id="insertionResult"></pre>
@@ -111,8 +55,62 @@ show_sidebar: false
     }
   </style>
 </head>
-<body>
-  <script>
+  <style>
+    .box {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: lightblue;
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+  </style>
+<script>
+    function sendSortRequest(sortType) {
+        var data = document.getElementById(sortType + 'Input').value;
+        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
+
+        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
+            method: 'POST',
+            body: JSON.stringify(requestData), // Send the list directly as the request body
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById(sortType + 'Result').textContent = JSON.stringify(data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    function analyzeSorts() {
+        var data = document.getElementById('analysisInput').value;
+        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
+
+        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
+            method: 'POST',
+            body: JSON.stringify(requestData), // Send the list directly as the request body
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('analysisResult').textContent = JSON.stringify(data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+<script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
         var requestData = data.split(',').map(Number);
@@ -147,9 +145,13 @@ show_sidebar: false
 
         for (let i = 0; i < length - 1; i++) {
             for (let j = 0; j < length - i - 1; j++) {
+                // Alternate colors between yellow and lightgreen
+                const color1 = (j % 2 === 0) ? 'yellow' : 'lightgreen';
+                const color2 = (j % 2 === 0) ? 'lightgreen' : 'yellow';
+
                 // Highlight the elements being compared
-                visualization.children[j].style.backgroundColor = 'yellow';
-                visualization.children[j + 1].style.backgroundColor = 'yellow';
+                visualization.children[j].style.backgroundColor = color1;
+                visualization.children[j + 1].style.backgroundColor = color2;
 
                 await sleep(500); // Adjust the speed of animation
 
@@ -186,8 +188,7 @@ show_sidebar: false
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-  </script>
-</body>
-</html>
+</script>
+
 
 

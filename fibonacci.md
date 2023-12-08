@@ -16,12 +16,14 @@ show_sidebar: false
 <input type="number" id="matrixIndex" placeholder="Enter Fibonacci Index" />
 <button onclick="fetchFibonacci('matrix', document.getElementById('matrixIndex').value)">Calculate</button>
 <pre id="matrixResult"></pre>
+<canvas id="matrixChart" width="400" height="200"></canvas>
 
 ## Fibonacci - Binet's Formula Method
 
 <input type="number" id="binetIndex" placeholder="Enter Fibonacci Index" />
 <button onclick="fetchFibonacci('binet', document.getElementById('binetIndex').value)">Calculate</button>
 <pre id="binetResult"></pre>
+<canvas id="binetChart" width="400" height="200"></canvas>
 
 <script>
     function fetchFibonacci(method, index) {
@@ -32,6 +34,37 @@ show_sidebar: false
         })
         .catch(error => {
             console.error('Error:', error);
+        });
+    }
+        function visualizeFibonacci(sequence, chartId) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        const labels = Array.from({ length: sequence.length }, (_, i) => i + 1);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Fibonacci Sequence',
+                    data: sequence,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    pointRadius: 2,
+                    fill: false,
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom'
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left'
+                    }
+                }
+            }
         });
     }
 </script>
