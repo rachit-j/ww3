@@ -12,7 +12,7 @@ show_sidebar: false
 <pre id="bubbleResult"></pre>
 
 ## Insertion Sort
-<p>
+
 <input type="text" id="insertionInput" placeholder="Enter numbers separated by commas" />
 <button onclick="sendSortRequest('insertion')">Sort</button>
 <pre id="insertionResult"></pre>
@@ -54,20 +54,7 @@ show_sidebar: false
       font-size: 18px;
     }
   </style>
-</head>
-  <style>
-    .box {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background-color: lightblue;
-      margin: 0 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-  </style>
+
 <script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
@@ -110,7 +97,8 @@ show_sidebar: false
     }
 </script>
 
-<script>
+<body>
+  <script>
     function sendSortRequest(sortType) {
         var data = document.getElementById(sortType + 'Input').value;
         var requestData = data.split(',').map(Number);
@@ -145,13 +133,9 @@ show_sidebar: false
 
         for (let i = 0; i < length - 1; i++) {
             for (let j = 0; j < length - i - 1; j++) {
-                // Alternate colors between yellow and lightgreen
-                const color1 = (j % 2 === 0) ? 'yellow' : 'lightgreen';
-                const color2 = (j % 2 === 0) ? 'lightgreen' : 'yellow';
-
                 // Highlight the elements being compared
-                visualization.children[j].style.backgroundColor = color1;
-                visualization.children[j + 1].style.backgroundColor = color2;
+                visualization.children[j].style.backgroundColor = 'yellow';
+                visualization.children[j + 1].style.backgroundColor = 'yellow';
 
                 await sleep(500); // Adjust the speed of animation
 
@@ -184,11 +168,46 @@ show_sidebar: false
             visualization.appendChild(box);
         });
     }
-
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-</script>
+    function visualizeSort(sortType, data) {
+    const containerId = sortType + 'Result';
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
 
+    const visualization = document.createElement('div');
+    visualization.id = sortType + 'Visualization';
+    visualization.style.display = 'flex';
+
+    data.forEach((num, index) => {
+        const box = document.createElement('div');
+        box.className = 'box';
+        box.textContent = num;
+        box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Assign colors based on index
+        visualization.appendChild(box);
+    });
+
+    container.appendChild(visualization);
+
+    animateSort(sortType, data);
+}
+
+function updateVisualization(sortType, data) {
+    const visualization = document.getElementById(sortType + 'Visualization');
+    visualization.innerHTML = '';
+
+    data.forEach((num, index) => {
+        const box = document.createElement('div');
+        box.className = 'box';
+        box.textContent = num;
+        box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Preserve colors after sorting
+        visualization.appendChild(box);
+    });
+}
+
+  </script>
+</body>
+</html>
 
 
