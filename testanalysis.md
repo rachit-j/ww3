@@ -82,7 +82,7 @@ show_sidebar: false
 
 <script>
     function sendSortRequest(sortType) {
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/card', {
+        fetch('http://localhost:8062/api/card', {
             method: 'GET',
         })
         .then(response => response.json())
@@ -98,6 +98,7 @@ show_sidebar: false
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 // Update the table with the results
                 var sortedListCell = document.getElementById(sortType + 'List');
                 var sortedList = data.sortedList.join(', ');
