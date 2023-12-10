@@ -1,6 +1,6 @@
 ---
-title: Fibonacci
-subtitle: fibonacci visualization
+title: Fibonacci Visualization
+subtitle: Fibonacci Visualization
 layout: page
 show_sidebar: false
 ---
@@ -8,8 +8,6 @@ show_sidebar: false
 # Fibonacci Visualization
 
 **Fibonacci Sequence Calculator**
-
-<!--Fibonacci Create 2 additional methods to solve nth result in the Fibonacci Sequence. Build a frontend output to show results and analysis. Sample of Fibonacci Frontend-->
 
 ## Fibonacci - Matrix Method
 
@@ -27,15 +25,18 @@ show_sidebar: false
 
 <script>
     function fetchFibonacci(method, index) {
-        fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
+        fetch(`http://localhost:8062/api/fibonacci/${method}/${index}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById(method + 'Result').textContent = JSON.stringify(data);
+            animateFibonacciSequence(index);
+
         })
         .catch(error => {
             console.error('Error:', error);
         });
     }
+<<<<<<< Updated upstream
         function visualizeFibonacci(sequence, chartId) {
         const ctx = document.getElementById(chartId).getContext('2d');
         const labels = Array.from({ length: sequence.length }, (_, i) => i + 1);
@@ -68,3 +69,33 @@ show_sidebar: false
         });
     }
 </script>
+=======
+</script>
+
+<div id="fibonacciContainer" class="fibonacci-container"></div>
+
+<!-- Fibonacci calculation and animation script -->
+<script>
+    function animateFibonacciSequence(index) {
+        const container = document.getElementById('fibonacciContainer');
+        container.innerHTML = ''; // Clear previous animation
+
+        let a = 0, b = 1, temp;
+        for (let i = 0; i <= index; i++) {
+            temp = a;
+            a = a + b;
+            b = temp;
+
+            const item = document.createElement('div');
+            item.classList.add('fibonacci-item');
+            item.textContent = b;
+            container.appendChild(item);
+
+            // Delay each item's appearance
+            setTimeout(() => {
+                item.style.opacity = 1;
+            }, i * 100); // Adjust time as needed
+        }
+}
+</script>
+>>>>>>> Stashed changes

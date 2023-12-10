@@ -1,6 +1,6 @@
 ---
-title: Fibonacci Visualization
-subtitle: Fibonacci Visualization
+title: Fibonacci
+subtitle: fibonacci visualization
 layout: page
 show_sidebar: false
 ---
@@ -8,6 +8,8 @@ show_sidebar: false
 # Fibonacci Visualization
 
 **Fibonacci Sequence Calculator**
+
+<!--Fibonacci Create 2 additional methods to solve nth result in the Fibonacci Sequence. Build a frontend output to show results and analysis. Sample of Fibonacci Frontend-->
 
 ## Fibonacci - Matrix Method
 
@@ -21,34 +23,6 @@ show_sidebar: false
 <button onclick="fetchFibonacci('binet', document.getElementById('binetIndex').value)">Calculate</button>
 <pre id="binetResult"></pre>
 
-<!-- Canvas for Fibonacci Shell Visualization -->
-<div id="fibonacciCanvas"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-<script>
-    let fibSequence = []; // To store the Fibonacci sequence
-
-    function setup() {
-        let canvas = createCanvas(600, 600);
-        canvas.parent('fibonacciCanvas');
-        noFill();
-    }
-
-    function drawFibonacciShell(n) {
-        clear();
-        let x = width / 2, y = height / 2;
-        let angle = 0, radius = 5;
-
-        for(let i = 0; i < n; i++) {
-            let currentRadius = radius * sqrt(fibSequence[i]); // Adjust radius based on Fibonacci number
-            arc(x, y, currentRadius * 2, currentRadius * 2, angle, angle + PI/2);
-            angle += PI / 2;
-
-            if (i % 2 === 0) x += currentRadius / 2;
-            else y += currentRadius / 2;
-        }
-    }
-</script>
 <script>
     function fetchFibonacci(method, index) {
         fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
