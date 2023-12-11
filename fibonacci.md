@@ -25,9 +25,8 @@ show_sidebar: false
 <script>
 // fetchFibonacci function fetches fibonacci data from an API using the provided method and index
 function fetchFibonacci(method, index) {
-    // make a fetch request to the fibonacci API endpoint with the specified method and index
-    fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
-    .then(response => response.json()) // Parse the response as JSON
+    fetch(`http://localhost:8062/api/fibonacci/${method}/${index}`)
+    .then(response => response.json())
     .then(data => {
         // update the result display with the fetched fibonacci data in string format
         document.getElementById(method + 'Result').textContent = JSON.stringify(data);

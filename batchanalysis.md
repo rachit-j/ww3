@@ -37,7 +37,7 @@ show_sidebar: false
     function analyzeSorts() {
         var data = document.getElementById('analysisInput').value;
         var requestData = data.split(',').map(Number);
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
+        fetch('http://localhost:8062/api/sorting/analyze', {
             method: 'POST',
             body: JSON.stringify(requestData),
             headers: {

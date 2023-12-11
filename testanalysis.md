@@ -5,6 +5,33 @@ layout: page
 show_sidebar: false
 ---
 
+<script>
+    async function sendSortRequest(sortType) {
+    const url = 'http://localhost:8062/api/card/split';
+    const response = await fetchData(url);
+
+    if (response && response.length > 0) {
+        // Extract the ranks from the response data
+        const ranks = response[0].map(item => item.rank);
+
+        fetch('http://localhost:8062/api/sorting/' + sortType, {
+            method: 'POST',
+            body: JSON.stringify(ranks), // Send an array of ranks
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            visualizeSort(sortType, data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+}
+
+</script>
 
 Bubble Sort
 <button onclick="sendSortRequest('bubble')">Sort</button>
@@ -74,12 +101,17 @@ Sorting Analysis
         const visualization = document.createElement('div');
         visualization.id = sortType + 'Visualization';
 
-        data.forEach((array, colorIndex) => {
-            array.forEach(({ rank }, index) => {
+        // Check if data has a 'sortedList' property that is an array
+        if (data && Array.isArray(data.sortedList)) {
+            data.sortedList.forEach((value, index) => {
                 const box = document.createElement('div');
                 box.className = 'box';
-                box.textContent = rank;
-                box.style.backgroundColor = colorIndex === 0 ? '#add8e6' : 'red'; // Blue for the first array, red for the second
+                box.textContent = value;
+
+                // Randomly choose the color as either red or blue
+                const randomColor = Math.random() < 0.5 ? 'red' : 'blue';
+                box.style.backgroundColor = randomColor;
+
                 visualization.appendChild(box);
 
                 // Create a new row after every 5 boxes
@@ -89,12 +121,21 @@ Sorting Analysis
                     visualization.appendChild(row);
                 }
             });
-        });
+        } else {
+            // Handle the case where data does not have the expected structure
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Error: Data does not have the expected structure';
+            visualization.appendChild(errorMessage);
+        }
 
         container.appendChild(visualization);
 
-        animateSort(sortType, data);
+        // You can add further logic here as needed for animation or other functionality.
     }
+
+
+
+
 
     async function animateSort(sortType, data) {
         const visualization = document.getElementById(sortType + 'Visualization');
@@ -149,7 +190,7 @@ Sorting Analysis
         });
     }
 
-    async function sendSortRequest(sortType) {
+    /* async function sendSortRequest(sortType) {
         const url = 'http://localhost:8062/api/card/split';
         const data = await fetchData(url);
 
@@ -157,6 +198,7 @@ Sorting Analysis
             visualizeSort(sortType, data);
         }
     }
+    */
 
     async function analyzeSorts() {
         const url = 'http://localhost:8062/api/card/split';
