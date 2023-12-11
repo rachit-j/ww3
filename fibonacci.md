@@ -31,6 +31,9 @@ function fetchFibonacci(method, index) {
     .then(data => {
         // update the result display with the fetched fibonacci data in string format
         document.getElementById(method + 'Result').textContent = JSON.stringify(data);
+
+        // log fetch data to console        
+        console.log('Fetched Fibonacci Data:', data); // Log fetched data to console
         
         // draw a fibonacci swirl using the fetched data and the specified method
         drawFibonacciSwirl(data.result, method);
@@ -60,7 +63,7 @@ function drawFibonacciSwirl(fibonacciArray, method) {
             const value = fibonacciArray[index];
             
             // calculate the angle and radius for each point in the swirl
-            const angle = index * 10; // Adjust the angle increment for a better swirl
+            const angle = index * 10; // adjust the angle increment for a better swirl
             const radius = value * radiusFactor;
 
             // calculate the coordinates for each point based on the angle and radius
@@ -73,6 +76,11 @@ function drawFibonacciSwirl(fibonacciArray, method) {
             ctx.fillStyle = 'blue';
             ctx.fill();
             ctx.closePath();
+
+            // displaying fibonacci values next to point
+            ctx.fillStyle = 'black';
+            ctx.font = '10px Arial';
+            ctx.fillText(value, x + 5, y - 5);
         }
     }
 }
