@@ -5,6 +5,81 @@ layout: page
 show_sidebar: false
 ---
 
+<style>
+    .scrollable-list {
+        max-height: 100px; /* Adjust the max height as needed */
+        overflow-y: auto;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sort Type</th>
+            <th>Sorted List</th>
+            <th>Time Taken (ms)</th>
+            <th>Iterations</th>
+            <th>Comparisons</th>
+            <th>Swaps</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="bubbleRow">
+            <td>Bubble Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="bubbleList"></span>
+                </div>
+            </td>
+            <td id="bubbleTime"></td>
+            <td id="bubbleIterations"></td>
+            <td id="bubbleComparisons"></td>
+            <td id="bubbleSwaps"></td>
+            <td><button onclick="sendSortRequest('bubble')">Sort</button></td>
+        </tr>
+        <tr id="insertionRow">
+            <td>Insertion Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="insertionList"></span>
+                </div>
+            </td>
+            <td id="insertionTime"></td>
+            <td id="insertionIterations"></td>
+            <td id="insertionComparisons"></td>
+            <td id="insertionSwaps"></td>
+            <td><button onclick="sendSortRequest('insertion')">Sort</button></td>
+        </tr>
+        <tr id="mergeRow">
+            <td>Merge Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="mergeList"></span>
+                </div>
+            </td>
+            <td id="mergeTime"></td>
+            <td id="mergeIterations"></td>
+            <td id="mergeComparisons"></td>
+            <td id="mergeSwaps"></td>
+            <td><button onclick="sendSortRequest('merge')">Sort</button></td>
+        </tr>
+        <tr id="selectionRow">
+            <td>Selection Sort</td>
+            <td>
+                <div class="scrollable-list">
+                    <span id="selectionList"></span>
+                </div>
+            </td>
+            <td id="selectionTime"></td>
+            <td id="selectionIterations"></td>
+            <td id="selectionComparisons"></td>
+            <td id="selectionSwaps"></td>
+            <td><button onclick="sendSortRequest('selection')">Sort</button></td>
+        </tr>
+    </tbody>
+</table>
+
 <script>
     function sendSortRequest(sortType) {
         fetch('http://localhost:8062/api/card', {
@@ -12,122 +87,40 @@ show_sidebar: false
         })
         .then(response => response.json())
         .then(data => {
-            visualizeSort(sortType, data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
+            var requestData = data.map(card => card.rank);
 
-    function analyzeSorts() {
-        fetch('http://localhost:8062/api/card', {
-            method: 'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-            visualizeSort('analysis', data);
+            fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
+                method: 'POST',
+                body: JSON.stringify(requestData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Update the table with the results
+                var sortedListCell = document.getElementById(sortType + 'List');
+                var sortedList = data.sortedList.join(', ');
+
+                if (sortedList.length > 50) {
+                    // scroll
+                    sortedListCell.innerHTML = '<div class="scrollable-list">' + sortedList + '</div>';
+                } else {
+                    sortedListCell.textContent = sortedList;
+                }
+
+                document.getElementById(sortType + 'Time').textContent = data.timeTakenMs;
+                document.getElementById(sortType + 'Iterations').textContent = data.iterations;
+                document.getElementById(sortType + 'Comparisons').textContent = data.comparisons;
+                document.getElementById(sortType + 'Swaps').textContent = data.swaps;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     }
 </script>
-
-<body>
-    <script>
-        function sendSortRequest(sortType) {
-            fetch('http://localhost:8062/api/card', {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                visualizeSort(sortType, data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
-
-        function analyzeSorts() {
-            fetch('http://localhost:8062/api/card', {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                visualizeSort('analysis', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
-
-        function visualizeSort(sortType, data) {
-            const containerId = sortType + 'Result';
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-
-            const visualization = document.createElement('div');
-            visualization.id = sortType + 'Visualization';
-            visualization.style.display = 'flex';
-
-            data.forEach((num, index) => {
-                const box = document.createElement('div');
-                box.className = 'box';
-                box.textContent = num;
-                box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Assign colors based on index
-                visualization.appendChild(box);
-            });
-
-            container.appendChild(visualization);
-
-            animateSort(sortType, data);
-        }
-
-        function updateVisualization(sortType, data) {
-            const visualization = document.getElementById(sortType + 'Visualization');
-            visualization.innerHTML = '';
-
-            data.forEach((num, index) => {
-                const box = document.createElement('div');
-                box.className = 'box';
-                box.textContent = num;
-                box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Preserve colors after sorting
-                visualization.appendChild(box);
-            });
-        }
-
-        async function animateSort(sortType, data) {
-            const visualization = document.getElementById(sortType + 'Visualization');
-            const length = data.length;
-
-            for (let i = 0; i < length - 1; i++) {
-                for (let j = 0; j < length - i - 1; j++) {
-                    // Highlight the elements being compared
-                    visualization.children[j].style.backgroundColor = 'yellow';
-                    visualization.children[j + 1].style.backgroundColor = 'yellow';
-
-                    await sleep(500); // Adjust the speed of animation
-
-                    // Swap elements if they are in the wrong order
-                    if (data[j] > data[j + 1]) {
-                        const temp = data[j];
-                        data[j] = data[j + 1];
-                        data[j + 1] = temp;
-
-                        updateVisualization(sortType, data);
-                    }
-
-                    // Reset background color
-                    visualization.children[j].style.backgroundColor = 'lightblue';
-                    visualization.children[j + 1].style.backgroundColor = 'lightblue';
-                }
-            }
-
-            updateVisualization(sortType, data);
-        }
-
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-    </script>
-</body>
