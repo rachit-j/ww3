@@ -51,6 +51,7 @@ Sorting Analysis
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+
 <script>
     async function fetchData(url) {
         try {
@@ -74,7 +75,7 @@ Sorting Analysis
         visualization.id = sortType + 'Visualization';
 
         data.forEach((array, colorIndex) => {
-            array.forEach((rank, index) => {
+            array.forEach(({ rank }, index) => {
                 const box = document.createElement('div');
                 box.className = 'box';
                 box.textContent = rank;
@@ -106,7 +107,7 @@ Sorting Analysis
 
                 await sleep(500);
 
-                if (data[0][j] > data[0][j + 1] && data[1][j] > data[1][j + 1]) {
+                if (data[0][j].rank > data[0][j + 1].rank && data[1][j].rank > data[1][j + 1].rank) {
                     const temp0 = data[0][j];
                     data[0][j] = data[0][j + 1];
                     data[0][j + 1] = temp0;
@@ -131,7 +132,7 @@ Sorting Analysis
         visualization.innerHTML = '';
 
         data.forEach((array, colorIndex) => {
-            array.forEach((rank, index) => {
+            array.forEach(({ rank }, index) => {
                 const box = document.createElement('div');
                 box.className = 'box';
                 box.textContent = rank;
