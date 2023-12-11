@@ -8,8 +8,6 @@ show_sidebar: false
 <style>
         canvas {
             border: 3px solid #000;
-            margin-top: 10px;
-            background-color: #f0f0f0;
         }
 </style>
 <body>
@@ -59,8 +57,12 @@ function drawFibonacciSwirl(fibonacciArray, method) {
 
     // check if fibonacciArray is an array before iterating through it
     if (Array.isArray(fibonacciArray)) {
-        // iterate through the fibonacci array using a for loop
-        for (let index = 0; index < fibonacciArray.length; index++) {
+
+        // animation
+        animateSwirl(0);
+
+        function animateSwirl(index) {
+            if (index < fibonacciArray.length){
             // retrieve the fibonacci value at the current index
             const value = fibonacciArray[index];
             
@@ -83,6 +85,7 @@ function drawFibonacciSwirl(fibonacciArray, method) {
             ctx.fillStyle = 'black';
             ctx.font = '10px Arial';
             ctx.fillText(value, x + 5, y - 5);
+            }
         }
     }
 }
