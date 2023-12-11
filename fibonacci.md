@@ -17,15 +17,29 @@ show_sidebar: false
     <h2>Fibonacci - Matrix Method</h2>
     <input type="number" id="matrixIndex" placeholder="Enter Fibonacci Index" />
     <button onclick="fetchFibonacci('matrix', document.getElementById('matrixIndex').value)">Calculate</button>
-    <pre id="matrixResult"></pre>
     <!-- Fibonacci - Binet's Formula Method -->
     <h2>Fibonacci - Binet's Formula Method</h2>
     <input type="number" id="binetIndex" placeholder="Enter Fibonacci Index" />
     <button onclick="fetchFibonacci('binet', document.getElementById('binetIndex').value)">Calculate</button>
-    <pre id="binetResult"></pre>
-    <canvas id="binetCanvas" width="500" height="500"></canvas>
+    <canvas id="fibonacciCanvas" width="500" height="500"></canvas>
 
 <script>
+        // function to fetch Fibonacci sequence data from the API
+        function fetchFibonacci(method, index) {
+            // fetch data from the API
+            fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
+            .then(response => response.json())
+            .then(data => {
+                // display the result in the pre tag
+                document.getElementById(method + 'Result').textContent = JSON.stringify(data);
+                // draw the Fibonacci sequence on the canvas
+                drawFibonacci(data.sequence, method);
+            })
+            .catch(error => {
+                // log any errors to the console
+                console.error('Error:', error);
+            });
+        }
         // get canvas and 2D rendering context
         const canvas = document.getElementById('fibonacciCanvas');
         const ctx = canvas.getContext('2d');
@@ -59,23 +73,6 @@ show_sidebar: false
 
             // stroke the path to display the complete sequence
             ctx.stroke();
-        }
-
-        // function to fetch Fibonacci sequence data from the API
-        function fetchFibonacci(method, index) {
-            // fetch data from the API
-            fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
-            .then(response => response.json())
-            .then(data => {
-                // display the result in the pre tag
-                document.getElementById(method + 'Result').textContent = JSON.stringify(data);
-                // draw the Fibonacci sequence on the canvas
-                drawFibonacci(data.sequence, method);
-            })
-            .catch(error => {
-                // log any errors to the console
-                console.error('Error:', error);
-            });
         }
 </script>
 </body>
