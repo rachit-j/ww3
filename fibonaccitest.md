@@ -25,7 +25,7 @@ show_sidebar: false
 
 <script>
     function fetchFibonacci(method, index) {
-        fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
+        fetch(`http://localhost:8062/api/fibonacci/${method}/${index}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById(method + 'Result').textContent = JSON.stringify(data);
