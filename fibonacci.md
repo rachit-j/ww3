@@ -85,10 +85,34 @@ function drawFibonacciSwirl(fibonacciArray, method) {
             ctx.fillStyle = 'black';
             ctx.font = '10px Arial';
             ctx.fillText(value, x + 5, y - 5);
+
+            // keep drawing if not stop
+            if (animationId !== null) {
+            animationId = requestAnimationFrame(() => drawNextPoint(index + 1));
             }
         }
     }
 }
+//stop and start buttons
+    function stopAnimation(canvasId) {
+        if (animationId !== null) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    clearCanvas(canvasId);
+        }
+
+    function startAnimation(canvasId) {
+        if (animationId === null) {
+            drawFibonacciSwirl([], canvasId.replace('Canvas', ''));
+            }
+        }
+
+    function clearCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
 </script>
 </body>
 
