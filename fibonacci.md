@@ -4,12 +4,8 @@ subtitle: Fibonacci Visualization
 layout: page
 show_sidebar: false
 ---
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Fibonacci Visualization</title>
 </head>
 <body>
@@ -21,7 +17,7 @@ show_sidebar: false
     <h2>Fibonacci - Binet's Formula Method</h2>
     <input type="number" id="binetIndex" placeholder="Enter Fibonacci Index" />
     <button onclick="fetchFibonacci('binet', document.getElementById('binetIndex').value)">Calculate</button>
-    <canvas id="fibonacciCanvas" width="500" height="500"></canvas>
+    <canvas id="fibonacciCanvas" width="800" height="400" style="border:1px solid #000;"></canvas>
 
 <script>
         // function to fetch Fibonacci sequence data from the API
