@@ -42,65 +42,19 @@ show_sidebar: false
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    .box {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background-color: lightblue;
-      margin: 0 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
+     .box {
+        width: 30px;
+        height: 30px;
+        margin: 2px;
+        text-align: center;
+        line-height: 30px;
+        border: 1px solid #000;
     }
   </style>
 
 <script>
     function sendSortRequest(sortType) {
-        var data = document.getElementById(sortType + 'Input').value;
-        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
-
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
-            method: 'POST',
-            body: JSON.stringify(requestData), // Send the list directly as the request body
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById(sortType + 'Result').textContent = JSON.stringify(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
-    function analyzeSorts() {
-        var data = document.getElementById('analysisInput').value;
-        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
-
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
-            method: 'POST',
-            body: JSON.stringify(requestData), // Send the list directly as the request body
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('analysisResult').textContent = JSON.stringify(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-</script>
-
-<body>
-  <script>
-    function sendSortRequest(sortType) {
-        var data = document.getElementById(sortType + 'Input').value;
+        var data = document.getElementById('sortInput').value;
         var requestData = data.split(',').map(Number);
 
         visualizeSort(sortType, requestData);
@@ -115,10 +69,11 @@ show_sidebar: false
         visualization.id = sortType + 'Visualization';
         visualization.style.display = 'flex';
 
-        data.forEach((num) => {
+        data.forEach((num, index) => {
             const box = document.createElement('div');
             box.className = 'box';
             box.textContent = num;
+            box.style.backgroundColor = getBackgroundColor(index);
             visualization.appendChild(box);
         });
 
@@ -127,19 +82,27 @@ show_sidebar: false
         animateSort(sortType, data);
     }
 
+    function getBackgroundColor(index) {
+        if (index % 3 === 0) {
+            return 'lightblue';
+        } else if (index % 3 === 1) {
+            return 'lightgreen';
+        } else {
+            return 'lightcoral'; // Add light red as the third color
+        }
+    }
+
     async function animateSort(sortType, data) {
         const visualization = document.getElementById(sortType + 'Visualization');
         const length = data.length;
 
         for (let i = 0; i < length - 1; i++) {
             for (let j = 0; j < length - i - 1; j++) {
-                // Highlight the elements being compared
                 visualization.children[j].style.backgroundColor = 'yellow';
                 visualization.children[j + 1].style.backgroundColor = 'yellow';
 
-                await sleep(500); // Adjust the speed of animation
+                await sleep(500);
 
-                // Swap elements if they are in the wrong order
                 if (data[j] > data[j + 1]) {
                     const temp = data[j];
                     data[j] = data[j + 1];
@@ -148,9 +111,8 @@ show_sidebar: false
                     updateVisualization(sortType, data);
                 }
 
-                // Reset background color
-                visualization.children[j].style.backgroundColor = 'lightblue';
-                visualization.children[j + 1].style.backgroundColor = 'lightblue';
+                visualization.children[j].style.backgroundColor = getBackgroundColor(j);
+                visualization.children[j + 1].style.backgroundColor = getBackgroundColor(j + 1);
             }
         }
 
@@ -161,53 +123,17 @@ show_sidebar: false
         const visualization = document.getElementById(sortType + 'Visualization');
         visualization.innerHTML = '';
 
-        data.forEach((num) => {
+        data.forEach((num, index) => {
             const box = document.createElement('div');
             box.className = 'box';
             box.textContent = num;
+            box.style.backgroundColor = getBackgroundColor(index);
             visualization.appendChild(box);
         });
     }
+
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-    function visualizeSort(sortType, data) {
-    const containerId = sortType + 'Result';
-    const container = document.getElementById(containerId);
-    container.innerHTML = '';
-
-    const visualization = document.createElement('div');
-    visualization.id = sortType + 'Visualization';
-    visualization.style.display = 'flex';
-
-    data.forEach((num, index) => {
-        const box = document.createElement('div');
-        box.className = 'box';
-        box.textContent = num;
-        box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Assign colors based on index
-        visualization.appendChild(box);
-    });
-
-    container.appendChild(visualization);
-
-    animateSort(sortType, data);
-}
-
-function updateVisualization(sortType, data) {
-    const visualization = document.getElementById(sortType + 'Visualization');
-    visualization.innerHTML = '';
-
-    data.forEach((num, index) => {
-        const box = document.createElement('div');
-        box.className = 'box';
-        box.textContent = num;
-        box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Preserve colors after sorting
-        visualization.appendChild(box);
-    });
-}
-
-  </script>
-</body>
-</html>
-
+</script>
 
