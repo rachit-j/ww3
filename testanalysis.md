@@ -30,6 +30,23 @@ Sorting Analysis
 <pre id="analysisResult"></pre>
 
 <html lang="en">
+
+<style>
+    .box {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 0 5px 5px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .row {
+      display: flex;
+    }
+  </style>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,18 +73,21 @@ Sorting Analysis
         const visualization = document.createElement('div');
         visualization.id = sortType + 'Visualization';
 
-        data.forEach((card, index) => {
-            const box = document.createElement('div');
-            box.className = 'box';
-            box.textContent = card.rank; // Display the "rank" value
-            visualization.appendChild(box);
+        data.forEach((array, colorIndex) => {
+            array.forEach((rank, index) => {
+                const box = document.createElement('div');
+                box.className = 'box';
+                box.textContent = rank;
+                box.style.backgroundColor = colorIndex === 0 ? 'blue' : 'red'; // Blue for the first array, red for the second
+                visualization.appendChild(box);
 
-            // Create a new row after every 5 boxes
-            if ((index + 1) % 5 === 0) {
-                const row = document.createElement('div');
-                row.className = 'row';
-                visualization.appendChild(row);
-            }
+                // Create a new row after every 5 boxes
+                if ((index + 1) % 5 === 0) {
+                    const row = document.createElement('div');
+                    row.className = 'row';
+                    visualization.appendChild(row);
+                }
+            });
         });
 
         container.appendChild(visualization);
@@ -77,7 +97,7 @@ Sorting Analysis
 
     async function animateSort(sortType, data) {
         const visualization = document.getElementById(sortType + 'Visualization');
-        const length = data.length;
+        const length = Math.max(data[0].length, data[1].length);
 
         for (let i = 0; i < length - 1; i++) {
             for (let j = 0; j < length - i - 1; j++) {
@@ -86,16 +106,20 @@ Sorting Analysis
 
                 await sleep(500);
 
-                if (data[j].rank > data[j + 1].rank) { // Compare using "rank" value
-                    const temp = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = temp;
+                if (data[0][j] > data[0][j + 1] && data[1][j] > data[1][j + 1]) {
+                    const temp0 = data[0][j];
+                    data[0][j] = data[0][j + 1];
+                    data[0][j + 1] = temp0;
+
+                    const temp1 = data[1][j];
+                    data[1][j] = data[1][j + 1];
+                    data[1][j + 1] = temp1;
 
                     updateVisualization(sortType, data);
                 }
 
-                visualization.children[j].style.backgroundColor = 'lightblue';
-                visualization.children[j + 1].style.backgroundColor = 'lightblue';
+                visualization.children[j].style.backgroundColor = 'blue'; // Reset to blue for the first array
+                visualization.children[j + 1].style.backgroundColor = 'red'; // Reset to red for the second array
             }
         }
 
@@ -106,23 +130,26 @@ Sorting Analysis
         const visualization = document.getElementById(sortType + 'Visualization');
         visualization.innerHTML = '';
 
-        data.forEach((card, index) => {
-            const box = document.createElement('div');
-            box.className = 'box';
-            box.textContent = card.rank; // Display the "rank" value
-            visualization.appendChild(box);
+        data.forEach((array, colorIndex) => {
+            array.forEach((rank, index) => {
+                const box = document.createElement('div');
+                box.className = 'box';
+                box.textContent = rank;
+                box.style.backgroundColor = colorIndex === 0 ? 'blue' : 'red'; // Blue for the first array, red for the second
+                visualization.appendChild(box);
 
-            // Create a new row after every 5 boxes
-            if ((index + 1) % 5 === 0) {
-                const row = document.createElement('div');
-                row.className = 'row';
-                visualization.appendChild(row);
-            }
+                // Create a new row after every 5 boxes
+                if ((index + 1) % 5 === 0) {
+                    const row = document.createElement('div');
+                    row.className = 'row';
+                    visualization.appendChild(row);
+                }
+            });
         });
     }
 
     async function sendSortRequest(sortType) {
-        const url = 'http://localhost:8062/api/card';
+        const url = 'http://localhost:8062/api/card/split';
         const data = await fetchData(url);
 
         if (data) {
@@ -131,7 +158,7 @@ Sorting Analysis
     }
 
     async function analyzeSorts() {
-        const url = 'http://localhost:8062/api/card';
+        const url = 'http://localhost:8062/api/card/split';
         const data = await fetchData(url);
 
         if (data) {
