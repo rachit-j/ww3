@@ -36,7 +36,6 @@ show_sidebar: false
             console.error('Error:', error);
         });
     }
-<<<<<<< Updated upstream
         function visualizeFibonacci(sequence, chartId) {
         const ctx = document.getElementById(chartId).getContext('2d');
         const labels = Array.from({ length: sequence.length }, (_, i) => i + 1);
@@ -69,7 +68,6 @@ show_sidebar: false
         });
     }
 </script>
-=======
 </script>
 
 <div id="fibonacciContainer" class="fibonacci-container"></div>
@@ -98,4 +96,3 @@ show_sidebar: false
         }
 }
 </script>
->>>>>>> Stashed changes
