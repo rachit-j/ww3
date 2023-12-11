@@ -81,10 +81,10 @@ Sorting Analysis
         const visualization = document.createElement('div');
         visualization.id = sortType + 'Visualization';
 
-        data.forEach((num, index) => {
+        data.forEach((card, index) => {
             const box = document.createElement('div');
             box.className = 'box';
-            box.textContent = num;
+            box.textContent = card.rank; // Display the "rank" value
             visualization.appendChild(box);
 
             // Create a new row after every 15 boxes
@@ -111,7 +111,7 @@ Sorting Analysis
 
                 await sleep(500);
 
-                if (data[j] > data[j + 1]) {
+                if (data[j].rank > data[j + 1].rank) { // Compare using "rank" value
                     const temp = data[j];
                     data[j] = data[j + 1];
                     data[j + 1] = temp;
@@ -131,10 +131,10 @@ Sorting Analysis
         const visualization = document.getElementById(sortType + 'Visualization');
         visualization.innerHTML = '';
 
-        data.forEach((num, index) => {
+        data.forEach((card, index) => {
             const box = document.createElement('div');
             box.className = 'box';
-            box.textContent = num;
+            box.textContent = card.rank; // Display the "rank" value
             visualization.appendChild(box);
 
             // Create a new row after every 15 boxes
