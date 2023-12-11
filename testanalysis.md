@@ -31,103 +31,71 @@ show_sidebar: false
             console.error('Error:', error);
         });
     }
-</script>
 
-<body>
-    <script>
-        function sendSortRequest(sortType) {
-            fetch('http://localhost:8062/api/card', {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                visualizeSort(sortType, data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
+    function visualizeSort(sortType, data) {
+        const containerId = sortType + 'Result';
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
 
-        function analyzeSorts() {
-            fetch('http://localhost:8062/api/card', {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                visualizeSort('analysis', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
+        const visualization = document.createElement('div');
+        visualization.id = sortType + 'Visualization';
+        visualization.style.display = 'flex';
 
-        function visualizeSort(sortType, data) {
-            const containerId = sortType + 'Result';
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
+        data.forEach((num) => {
+            const box = document.createElement('div');
+            box.className = 'box';
+            box.textContent = num;
+            visualization.appendChild(box);
+        });
 
-            const visualization = document.createElement('div');
-            visualization.id = sortType + 'Visualization';
-            visualization.style.display = 'flex';
+        container.appendChild(visualization);
 
-            data.forEach((num, index) => {
-                const box = document.createElement('div');
-                box.className = 'box';
-                box.textContent = num;
-                box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Assign colors based on index
-                visualization.appendChild(box);
-            });
+        animateSort(sortType, data);
+    }
 
-            container.appendChild(visualization);
+    async function animateSort(sortType, data) {
+        const visualization = document.getElementById(sortType + 'Visualization');
+        const length = data.length;
 
-            animateSort(sortType, data);
-        }
+        for (let i = 0; i < length - 1; i++) {
+            for (let j = 0; j < length - i - 1; j++) {
+                // Highlight the elements being compared
+                visualization.children[j].style.backgroundColor = 'yellow';
+                visualization.children[j + 1].style.backgroundColor = 'yellow';
 
-        function updateVisualization(sortType, data) {
-            const visualization = document.getElementById(sortType + 'Visualization');
-            visualization.innerHTML = '';
+                await sleep(500); // Adjust the speed of animation
 
-            data.forEach((num, index) => {
-                const box = document.createElement('div');
-                box.className = 'box';
-                box.textContent = num;
-                box.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightred'; // Preserve colors after sorting
-                visualization.appendChild(box);
-            });
-        }
+                // Swap elements if they are in the wrong order
+                if (data[j] > data[j + 1]) {
+                    const temp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
 
-        async function animateSort(sortType, data) {
-            const visualization = document.getElementById(sortType + 'Visualization');
-            const length = data.length;
-
-            for (let i = 0; i < length - 1; i++) {
-                for (let j = 0; j < length - i - 1; j++) {
-                    // Highlight the elements being compared
-                    visualization.children[j].style.backgroundColor = 'yellow';
-                    visualization.children[j + 1].style.backgroundColor = 'yellow';
-
-                    await sleep(500); // Adjust the speed of animation
-
-                    // Swap elements if they are in the wrong order
-                    if (data[j] > data[j + 1]) {
-                        const temp = data[j];
-                        data[j] = data[j + 1];
-                        data[j + 1] = temp;
-
-                        updateVisualization(sortType, data);
-                    }
-
-                    // Reset background color
-                    visualization.children[j].style.backgroundColor = 'lightblue';
-                    visualization.children[j + 1].style.backgroundColor = 'lightblue';
+                    updateVisualization(sortType, data);
                 }
+
+                // Reset background color
+                visualization.children[j].style.backgroundColor = 'lightblue';
+                visualization.children[j + 1].style.backgroundColor = 'lightblue';
             }
-
-            updateVisualization(sortType, data);
         }
 
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-    </script>
-</body>
+        updateVisualization(sortType, data);
+    }
+
+    function updateVisualization(sortType, data) {
+        const visualization = document.getElementById(sortType + 'Visualization');
+        visualization.innerHTML = '';
+
+        data.forEach((num) => {
+            const box = document.createElement('div');
+            box.className = 'box';
+            box.textContent = num;
+            visualization.appendChild(box);
+        });
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+</script>
