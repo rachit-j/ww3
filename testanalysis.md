@@ -36,7 +36,6 @@ Sorting Analysis
 <button onclick="analyzeSorts()">Analyze</button>
 <pre id="analysisResult"></pre>
 
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -44,59 +43,23 @@ Sorting Analysis
   <style>
     .box {
       display: inline-block;
-      width: 40px;
-      height: 40px;
+      width: 30px; /* Adjusted box size */
+      height: 30px; /* Adjusted box size */
       background-color: lightblue;
       margin: 0 5px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 14px; /* Adjusted font size */
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
     }
   </style>
 
 <script>
-    function sendSortRequest(sortType) {
-        var data = document.getElementById(sortType + 'Input').value;
-        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
-
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
-            method: 'POST',
-            body: JSON.stringify(requestData), // Send the list directly as the request body
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById(sortType + 'Result').textContent = JSON.stringify(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
-    function analyzeSorts() {
-        var data = document.getElementById('analysisInput').value;
-        var requestData = data.split(',').map(Number); // Convert comma-separated input to a list of integers
-
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/analyze', {
-            method: 'POST',
-            body: JSON.stringify(requestData), // Send the list directly as the request body
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('analysisResult').textContent = JSON.stringify(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
-
     async function fetchData(url) {
         try {
             const response = await fetch(url);
@@ -117,13 +80,19 @@ Sorting Analysis
 
         const visualization = document.createElement('div');
         visualization.id = sortType + 'Visualization';
-        visualization.style.display = 'flex';
 
-        data.forEach((num) => {
+        data.forEach((num, index) => {
             const box = document.createElement('div');
             box.className = 'box';
             box.textContent = num;
             visualization.appendChild(box);
+
+            // Create a new row after every 15 boxes
+            if ((index + 1) % 15 === 0) {
+                const row = document.createElement('div');
+                row.className = 'row';
+                visualization.appendChild(row);
+            }
         });
 
         container.appendChild(visualization);
@@ -162,11 +131,18 @@ Sorting Analysis
         const visualization = document.getElementById(sortType + 'Visualization');
         visualization.innerHTML = '';
 
-        data.forEach((num) => {
+        data.forEach((num, index) => {
             const box = document.createElement('div');
             box.className = 'box';
             box.textContent = num;
             visualization.appendChild(box);
+
+            // Create a new row after every 15 boxes
+            if ((index + 1) % 15 === 0) {
+                const row = document.createElement('div');
+                row.className = 'row';
+                visualization.appendChild(row);
+            }
         });
     }
 
@@ -192,6 +168,3 @@ Sorting Analysis
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 </script>
-
-
-
