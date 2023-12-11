@@ -23,7 +23,78 @@ show_sidebar: false
     <button onclick="fetchFibonacci('binet', document.getElementById('binetIndex').value)">Calculate</button><div id="binetResult"></div>
 
     <canvas id="fibonacciCanvas" width="800" height="400" style="border:1px solid #000;"></canvas>
+<script>
+    function fetchFibonacci(method, index) {
+        fetch(`http://localhost:8062/api/fibonacci/${method}/${index}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById(method + 'Result').textContent = JSON.stringify(data);
+            animateFibonacciSequence(index);
 
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+        function visualizeFibonacci(sequence, chartId) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        const labels = Array.from({ length: sequence.length }, (_, i) => i + 1);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Fibonacci Sequence',
+                    data: sequence,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    pointRadius: 2,
+                    fill: false,
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom'
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left'
+                    }
+                }
+            }
+        });
+    }
+</script>
+</script>
+
+<div id="fibonacciContainer" class="fibonacci-container"></div>
+
+<!-- Fibonacci calculation and animation script -->
+<script>
+    function animateFibonacciSequence(index) {
+        const container = document.getElementById('fibonacciContainer');
+        container.innerHTML = ''; // Clear previous animation
+
+        let a = 0, b = 1, temp;
+        for (let i = 0; i <= index; i++) {
+            temp = a;
+            a = a + b;
+            b = temp;
+
+            const item = document.createElement('div');
+            item.classList.add('fibonacci-item');
+            item.textContent = b;
+            container.appendChild(item);
+
+            // Delay each item's appearance
+            setTimeout(() => {
+                item.style.opacity = 1;
+            }, i * 100); // Adjust time as needed
+        }
+}
 <script>
         // function to fetch Fibonacci sequence data from the API
         function fetchFibonacci(method, index) {

@@ -39,6 +39,7 @@ show_sidebar: false
     .larger-row {
         clear: both;
     }
+
     #bubbleResult,
     #insertionResult,
     #mergeResult,
