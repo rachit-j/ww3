@@ -5,33 +5,6 @@ layout: page
 show_sidebar: false
 ---
 
-<script>
-    async function sendSortRequest(sortType) {
-    const url = 'http://localhost:8062/api/card/split';
-    const response = await fetchData(url);
-
-    if (response && response.length > 0) {
-        // Extract the ranks from the response data
-        const ranks = response[0].map(item => item.rank);
-
-        fetch('http://localhost:8062/api/sorting/' + sortType, {
-            method: 'POST',
-            body: JSON.stringify(ranks), // Send an array of ranks
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            visualizeSort(sortType, data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-}
-
-</script>
 
 Bubble Sort
 <button onclick="sendSortRequest('bubble')">Sort</button>
@@ -78,7 +51,6 @@ Sorting Analysis
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-
 <script>
     async function fetchData(url) {
         try {
@@ -101,17 +73,12 @@ Sorting Analysis
         const visualization = document.createElement('div');
         visualization.id = sortType + 'Visualization';
 
-        // Check if data has a 'sortedList' property that is an array
-        if (data && Array.isArray(data.sortedList)) {
-            data.sortedList.forEach((value, index) => {
+        data.forEach((array, colorIndex) => {
+            array.forEach((rank, index) => {
                 const box = document.createElement('div');
                 box.className = 'box';
-                box.textContent = value;
-
-                // Randomly choose the color as either red or blue
-                const randomColor = Math.random() < 0.5 ? 'red' : 'blue';
-                box.style.backgroundColor = randomColor;
-
+                box.textContent = rank;
+                box.style.backgroundColor = colorIndex === 0 ? 'blue' : 'red'; // Blue for the first array, red for the second
                 visualization.appendChild(box);
 
                 // Create a new row after every 5 boxes
@@ -121,21 +88,12 @@ Sorting Analysis
                     visualization.appendChild(row);
                 }
             });
-        } else {
-            // Handle the case where data does not have the expected structure
-            const errorMessage = document.createElement('p');
-            errorMessage.textContent = 'Error: Data does not have the expected structure';
-            visualization.appendChild(errorMessage);
-        }
+        });
 
         container.appendChild(visualization);
 
-        // You can add further logic here as needed for animation or other functionality.
+        animateSort(sortType, data);
     }
-
-
-
-
 
     async function animateSort(sortType, data) {
         const visualization = document.getElementById(sortType + 'Visualization');
@@ -148,7 +106,7 @@ Sorting Analysis
 
                 await sleep(500);
 
-                if (data[0][j].rank > data[0][j + 1].rank && data[1][j].rank > data[1][j + 1].rank) {
+                if (data[0][j] > data[0][j + 1] && data[1][j] > data[1][j + 1]) {
                     const temp0 = data[0][j];
                     data[0][j] = data[0][j + 1];
                     data[0][j + 1] = temp0;
@@ -160,7 +118,7 @@ Sorting Analysis
                     updateVisualization(sortType, data);
                 }
 
-                visualization.children[j].style.backgroundColor = '#add8e6'; // Reset to blue for the first array
+                visualization.children[j].style.backgroundColor = 'blue'; // Reset to blue for the first array
                 visualization.children[j + 1].style.backgroundColor = 'red'; // Reset to red for the second array
             }
         }
@@ -173,11 +131,11 @@ Sorting Analysis
         visualization.innerHTML = '';
 
         data.forEach((array, colorIndex) => {
-            array.forEach(({ rank }, index) => {
+            array.forEach((rank, index) => {
                 const box = document.createElement('div');
                 box.className = 'box';
                 box.textContent = rank;
-                box.style.backgroundColor = colorIndex === 0 ? '#add8e6' : 'red'; // Blue for the first array, red for the second
+                box.style.backgroundColor = colorIndex === 0 ? 'blue' : 'red'; // Blue for the first array, red for the second
                 visualization.appendChild(box);
 
                 // Create a new row after every 5 boxes
@@ -190,7 +148,7 @@ Sorting Analysis
         });
     }
 
-    /* async function sendSortRequest(sortType) {
+    async function sendSortRequest(sortType) {
         const url = 'http://localhost:8062/api/card/split';
         const data = await fetchData(url);
 
@@ -198,7 +156,6 @@ Sorting Analysis
             visualizeSort(sortType, data);
         }
     }
-    */
 
     async function analyzeSorts() {
         const url = 'http://localhost:8062/api/card/split';
