@@ -15,11 +15,12 @@ show_sidebar: false
     <input type="number" id="matrixIndex" placeholder="Enter Fibonacci Index" />
     <button onclick="fetchFibonacci('matrix', document.getElementById('matrixIndex').value)">Calculate</button>
     <pre id="matrixResult"></pre>
+    <canvas id="matrixCanvas" width="500" height="500"></canvas>
     <h2>Fibonacci - Binet's Formula Method</h2>
     <input type="number" id="binetIndex" placeholder="Enter Fibonacci Index" />
     <button onclick="fetchFibonacci('binet', document.getElementById('binetIndex').value)">Calculate</button>
     <pre id="binetResult"></pre>
-    <canvas id="fibonacciCanvas" width="500" height="500"></canvas>
+    <canvas id="binetCanvas" width="500" height="500"></canvas>
 
 <script>
 // fetchFibonacci function fetches Fibonacci data from an API using the provided method and index
@@ -31,7 +32,7 @@ function fetchFibonacci(method, index) {
         document.getElementById(method + 'Result').textContent = JSON.stringify(data);
         
         // draw fibonacci swirl using the fetch data
-        drawFibonacciSwirl(data.result);
+        drawFibonacciSwirl(data.result, method);
     })
     .catch(error => {
         // log error message if there is an issue with API request
@@ -40,8 +41,8 @@ function fetchFibonacci(method, index) {
 }
 
 // function draws a visual of a fibonacci swirl on a canvas
-function drawFibonacciSwirl(fibonacciArray) {
-    const canvas = document.getElementById('fibonacciCanvas');
+function drawFibonacciSwirl(fibonacciArray, method) {
+    const canvas = document.getElementById('$(method)Canvas');
     const ctx = canvas.getContext('2d');
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
@@ -49,6 +50,9 @@ function drawFibonacciSwirl(fibonacciArray) {
 
     // clear the canvas before drawing the new fibonacci swirl
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // check if it is array before iterations
+    if (Array.isArray(fibonacciArray)) {
 
     // iterate through the fibonacci array to draw points on the canvas forming a swirl
     fibonacciArray.forEach((value, index) => {
@@ -67,6 +71,7 @@ function drawFibonacciSwirl(fibonacciArray) {
         ctx.fill();
         ctx.closePath();
     });
+}
 }
     </script>
 </body>
