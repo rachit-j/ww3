@@ -5,11 +5,59 @@ layout: page
 show_sidebar: false
 ---
 
+<style>
+    .box {
+        width: calc(100% / 20);
+        height: 30px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 30px;
+        float: left;
+    }
+
+    .row {
+        clear: both;
+    }
+
+    #bubbleVisualization,
+    #insertionVisualization,
+    #mergeVisualization,
+    #selectionVisualization,
+    #analysisVisualization {
+        width: 100%;
+    }
+
+    .larger-box {
+        width: calc(100% / 20);
+        height: 40px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 40px;
+        float: left;
+    }
+
+    .larger-row {
+        clear: both;
+    }
+    #bubbleResult,
+    #insertionResult,
+    #mergeResult,
+    #selectionResult,
+    #analysisResult {
+        width: 100%;
+        overflow: auto;
+        max-height: 600px; /* Adjust the max-height as needed */
+    }
+</style>
+
+
 Bubble Sort
+
 <button onclick="sendSortRequest('bubble')">Sort</button>
 <pre id="bubbleResult"></pre>
 
 Insertion Sort
+
 <button onclick="sendSortRequest('insertion')">Sort</button>
 <pre id="insertionResult"></pre>
 
