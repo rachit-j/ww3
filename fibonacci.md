@@ -7,7 +7,9 @@ show_sidebar: false
 
 <style>
         canvas {
-            border: 1px solid #000;
+            border: 3px solid #000;
+            margin-top: 10px;
+            background-color: #f0f0f0;
         }
 </style>
 <body>
