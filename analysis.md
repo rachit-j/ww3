@@ -90,7 +90,7 @@ show_sidebar: false
         var data = document.getElementById(sortType + 'Input').value;
         var requestData = data.split(',').map(Number);
 
-        fetch('https://ww3.stu.nighthawkcodingsociety.com/api/sorting/' + sortType, {
+        fetch('http://localhost:8062/api/sorting/' + sortType, {
             method: 'POST',
             body: JSON.stringify(requestData),
             headers: {
