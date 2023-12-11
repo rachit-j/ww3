@@ -79,7 +79,7 @@ Sorting Analysis
                 const box = document.createElement('div');
                 box.className = 'box';
                 box.textContent = rank;
-                box.style.backgroundColor = colorIndex === 0 ? '#add8e6' : 'red'; // Light blue for the first array, red for the second
+                box.style.backgroundColor = colorIndex === 0 ? '#add8e6' : 'red'; // Blue for the first array, red for the second
                 visualization.appendChild(box);
 
                 // Create a new row after every 5 boxes
@@ -119,7 +119,7 @@ Sorting Analysis
                     updateVisualization(sortType, data);
                 }
 
-                visualization.children[j].style.backgroundColor = '#add8e6'; // Reset to light blue for the first array
+                visualization.children[j].style.backgroundColor = '#add8e6'; // Reset to blue for the first array
                 visualization.children[j + 1].style.backgroundColor = 'red'; // Reset to red for the second array
             }
         }
@@ -136,7 +136,7 @@ Sorting Analysis
                 const box = document.createElement('div');
                 box.className = 'box';
                 box.textContent = rank;
-                box.style.backgroundColor = colorIndex === 0 ? '#add8e6' : 'red'; // Light blue for the first array, red for the second
+                box.style.backgroundColor = colorIndex === 0 ? '#add8e6' : 'red'; // Blue for the first array, red for the second
                 visualization.appendChild(box);
 
                 // Create a new row after every 5 boxes
@@ -150,8 +150,8 @@ Sorting Analysis
     }
 
     async function sendSortRequest(sortType) {
-        const sortUrl = `http://localhost:8062/api/sorting/${sortType}/`;
-        const data = await fetchData(sortUrl);
+        const url = 'http://localhost:8062/api/card/split';
+        const data = await fetchData(url);
 
         if (data) {
             visualizeSort(sortType, data);
