@@ -23,26 +23,27 @@ show_sidebar: false
     <canvas id="binetCanvas" width="500" height="500"></canvas>
 
 <script>
-// fetchFibonacci function fetches Fibonacci data from an API using the provided method and index
+// fetchFibonacci function fetches fibonacci data from an API using the provided method and index
 function fetchFibonacci(method, index) {
+    // make a fetch request to the fibonacci API endpoint with the specified method and index
     fetch(`https://ww3.stu.nighthawkcodingsociety.com/api/fibonacci/${method}/${index}`)
-    .then(response => response.json())
+    .then(response => response.json()) // Parse the response as JSON
     .then(data => {
-        // Update the result display with the fetched Fibonacci data
+        // update the result display with the fetched fibonacci data in string format
         document.getElementById(method + 'Result').textContent = JSON.stringify(data);
         
-        // draw fibonacci swirl using the fetch data
+        // draw a fibonacci swirl using the fetched data and the specified method
         drawFibonacciSwirl(data.result, method);
     })
     .catch(error => {
-        // log error message if there is an issue with API request
+        // log an error message to the console if there is an issue with the API request
         console.error('Error:', error);
     });
 }
 
-// function draws a visual of a fibonacci swirl on a canvas
+// function draws a visual representation of a fibonacci swirl on a canvas
 function drawFibonacciSwirl(fibonacciArray, method) {
-    const canvas = document.getElementById('$(method)Canvas');
+    const canvas = document.getElementById(`${method}Canvas`);
     const ctx = canvas.getContext('2d');
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
@@ -51,28 +52,30 @@ function drawFibonacciSwirl(fibonacciArray, method) {
     // clear the canvas before drawing the new fibonacci swirl
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // check if it is array before iteration
+    // check if fibonacciArray is an array before iterating through it
     if (Array.isArray(fibonacciArray)) {
+        // iterate through the fibonacci array using a for loop
+        for (let index = 0; index < fibonacciArray.length; index++) {
+            // retrieve the fibonacci value at the current index
+            const value = fibonacciArray[index];
+            
+            // calculate the angle and radius for each point in the swirl
+            const angle = index * 10; // Adjust the angle increment for a better swirl
+            const radius = value * radiusFactor;
 
-    // iterate through the fibonacci array to draw points on the canvas forming a swirl
-    fibonacciArray.forEach((value, index) => {
-        // calculate the angle and radius for each point
-        const angle = index * 10; // adjust the angle for swirl
-        const radius = value * radiusFactor;
+            // calculate the coordinates for each point based on the angle and radius
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
 
-        // calculate the coordinates for each point based on the angle and r
-        const x = centerX + radius * Math.cos(angle);
-        const y = centerY + radius * Math.sin(angle);
-
-        // draw a point on the canvas
-        ctx.beginPath();
-        ctx.arc(x, y, 2, 0, 2 * Math.PI);
-        ctx.fillStyle = 'blue';
-        ctx.fill();
-        ctx.closePath();
-    });
+            // draw a point on the canvas
+            ctx.beginPath();
+            ctx.arc(x, y, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
 }
-}
-    </script>
+</script>
 </body>
 
