@@ -51,7 +51,7 @@ function drawFibonacciSwirl(fibonacciArray, method) {
     // clear the canvas before drawing the new fibonacci swirl
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // check if it is array before iterations
+    // check if it is array before iteration
     if (Array.isArray(fibonacciArray)) {
 
     // iterate through the fibonacci array to draw points on the canvas forming a swirl
