@@ -1,5 +1,5 @@
 ---
-title: Posts
+title: Sorts
 subtitle: Sample Post Requests
 layout: page
 show_sidebar: false
