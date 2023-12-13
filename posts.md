@@ -96,32 +96,33 @@ Sorting Analysis
         }
     }
 
-    function visualizeSort(sortType, data) {
-        const containerId = sortType + 'Result';
-        const container = document.getElementById(containerId);
-        container.innerHTML = '';
+    function visualizeSort(sortType, cardList) {
+    const containerId = sortType + 'Result';
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
 
-        const visualization = document.createElement('div');
-        visualization.id = sortType + 'Visualization';
+    const visualization = document.createElement('div');
+    visualization.id = sortType + 'Visualization';
 
-        data.forEach((card, index) => {
-            const box = document.createElement('div');
-            box.className = 'box';
-            box.textContent = card.rank; // Display the "rank" value
-            visualization.appendChild(box);
+    cardList.forEach((card, index) => {
+        const box = document.createElement('div');
+        box.className = 'box';
+        box.textContent = card.rank; // Display the "rank" value
+        visualization.appendChild(box);
 
-            // Create a new row after every 5 boxes
-            if ((index + 1) % 5 === 0) {
-                const row = document.createElement('div');
-                row.className = 'row';
-                visualization.appendChild(row);
-            }
-        });
+        // Create a new row after every 5 boxes
+        if ((index + 1) % 5 === 0) {
+            const row = document.createElement('div');
+            row.className = 'row';
+            visualization.appendChild(row);
+        }
+    });
 
-        container.appendChild(visualization);
+    container.appendChild(visualization);
 
-        animateSort(sortType, data);
-    }
+    animateSort(sortType, cardList);
+}
+
 
     async function animateSort(sortType, data) {
         const visualization = document.getElementById(sortType + 'Visualization');
@@ -169,14 +170,15 @@ Sorting Analysis
         });
     }
 
-    async function sendSortRequest(sortType) {
-        const url = 'http://localhost:8062/api/card/split';
-        const data = await fetchData(url);
+ async function sendSortRequest(sortType) {
+    const url = 'http://localhost:8062/api/card/split';
+    const data = await fetchData(url);
 
-        if (data) {
-            visualizeSort(sortType, data);
-        }
+    if (data && data.length > 0) {
+        const firstList = data[0]; // Access the first list in the array
+        visualizeSort(sortType, firstList);
     }
+}
 
     async function analyzeSorts() {
         const url = 'http://localhost:8062/api/card/split';
