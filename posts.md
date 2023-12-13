@@ -7,12 +7,15 @@ show_sidebar: false
 
 <style>
     .box {
-        width: calc(100% / 20);
-        height: 30px;
-        border: 1px solid #000;
-        text-align: center;
-        line-height: 30px;
-        float: left;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: lightblue;
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
     }
 
     .row {
