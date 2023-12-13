@@ -170,7 +170,7 @@ Sorting Analysis
     }
 
     async function sendSortRequest(sortType) {
-        const url = 'http://localhost:8062/api/card';
+        const url = 'http://localhost:8062/api/card/split';
         const data = await fetchData(url);
 
         if (data) {
@@ -179,7 +179,7 @@ Sorting Analysis
     }
 
     async function analyzeSorts() {
-        const url = 'http://localhost:8062/api/card';
+        const url = 'http://localhost:8062/api/card/split';
         const data = await fetchData(url);
 
         if (data) {
