@@ -55,6 +55,11 @@ show_sidebar: false
 </style>
 
 
+Rules for World War 3:
+- Pick any set of numbers you want, you can choose a range containing 250 numbers.
+- Select your sorting algorithm
+- Whatever number that appears in the middle is the winner. If you have that number, you are the winner. If not, sucks to suck.
+
 Bubble Sort
 
 <button onclick="sendSortRequest('bubble')">Sort</button>
